@@ -7,6 +7,7 @@ window.onload = function() {
   function keyDownTextField(e) {
     if(e.keyCode == 13) {
       computeTime(typingStarted);
+      calcWPM();
     } else if (notStarted) {
       notStarted = false;
       typingStarted = new Date().getTime();
