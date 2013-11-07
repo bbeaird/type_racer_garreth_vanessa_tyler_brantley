@@ -1,6 +1,6 @@
 window.onload = function() {
   var inputBox  = document.getElementById("yourinput")
-  inputBox.addEventListener("keyup", keyDownTextField, false)
+  inputBox.addEventListener("keypress", keyDownTextField, false)
   runGame()
 }
 
@@ -20,9 +20,9 @@ function createSelectors() {
 }
 
 function setGoalSentence(goalText, displayText) {
-  var goal = 'this is the first sentence you should type'
-  goalText.innerHTML = goal
-  goal = goal.split('')
+  goalGlobal = 'you sentence t sentence you should type'
+  goalText.innerHTML = goalGlobal
+  goal = goalGlobal.split('')
   goal = "<span>" + goal.join('</span><span>') + "</span>"
   displayText.innerHTML = goal
 }
@@ -32,10 +32,10 @@ function keyDownTextField(e) {
     notStarted = false;
     startTime = new Date().getTime();
   } else { computeTime(startTime); }
+  // console.log(e.keyCode)
   updateText();
-  checkCorrect();
+  checkCorrect(e);
 }
-
 
 function computeTime(startTime) {
   var endTime = new Date().getTime();
@@ -44,18 +44,29 @@ function computeTime(startTime) {
 }
 
 
+
+
+
 function updateText() {
   var selectors = createSelectors()
   var input = selectors.inputBox.value;
   selectors.outputText.innerHTML = input;
 }
 
-function checkCorrect() {
+function checkCorrect(e) {
+  console.log("input: ", e.keyCode)
+
   var selectors = createSelectors()
   var input = selectors.inputBox.value
-  var goal = selectors.goalText.innerHTML
-  var location = input.length - 1
-  if (input[location] === goal[location]) {
+  var userInput = e.keyCode
+  // var goal = selectors.goalText.innerHTML
+  // var goal = goalGlobal.keyCode
+
+  // console.log(goalGlobal.keyCode + 'booo')
+  var location = input.length 
+    console.log('goal text ', goalGlobal.charCodeAt(location))
+  
+    if ( userInput === goalGlobal.charCodeAt(location) ) {
     console.log('letter match')
     highlightLetter(location)
   }
