@@ -1,6 +1,8 @@
-window.onload = function() {
+window.onload = function() {  
   var inputBox  = document.getElementById("yourinput")
-  inputBox.addEventListener("keypress", keyDownTextField, false)
+  inputBox.addEventListener("input", keyDownTextField, false)
+  window.addEventListener("keydown", upUpDownDown)
+  cheatCode = []
   runGame()
 }
 
@@ -11,7 +13,7 @@ function runGame() {
 
 function createSelectors() {
   var selectors = {
-    inputBox:    document.getElementById("yourinput"),
+    // inputBox:    document.getElementById("yourinput"),
     outputText:  document.getElementById("output"),
     goalText:    document.getElementById("goal_sentence"),
     displayText: document.getElementById("display_sentence") 
@@ -28,13 +30,14 @@ function setGoalSentence(goalText, displayText) {
 }
 
 function keyDownTextField(e) {
+  // console.log('input (3): also bubblin here')
   if(e.keyCode != 13) {
     notStarted = false;
     startTime = new Date().getTime();
   } else { computeTime(startTime); }
-  // console.log(e.keyCode)
-  updateText();
-  checkCorrect(e);
+  // console.log(e.srcElement.value)
+  updateText(e.srcElement.value);
+  checkCorrect(e.srcElement.value);
 }
 
 function computeTime(startTime) {
@@ -47,26 +50,25 @@ function computeTime(startTime) {
 
 
 
-function updateText() {
+function updateText(newText) {
   var selectors = createSelectors()
-  var input = selectors.inputBox.value;
-  selectors.outputText.innerHTML = input;
+  selectors.outputText.innerHTML = newText;
 }
 
-function checkCorrect(e) {
-  console.log("input: ", e.keyCode)
+function checkCorrect(newText) {
+  // console.log("input: ", newText)
 
-  var selectors = createSelectors()
-  var input = selectors.inputBox.value
-  var userInput = e.keyCode
+  // var selectors = createSelectors()
+  // var input = selectors.inputBox.value
+  // var userInput = e.keyCode
   // var goal = selectors.goalText.innerHTML
   // var goal = goalGlobal.keyCode
 
   // console.log(goalGlobal.keyCode + 'booo')
-  var location = input.length 
-    console.log('goal text ', goalGlobal.charCodeAt(location))
+  var location = newText.length - 1
+  // console.log('goal text ', goalGlobal.charCodeAt(location))
   
-    if ( userInput === goalGlobal.charCodeAt(location) ) {
+  if ( newText[location] === goalGlobal[location] ) {
     console.log('letter match')
     highlightLetter(location)
   }
@@ -75,5 +77,22 @@ function checkCorrect(e) {
 function highlightLetter(location) {
   $('#display_sentence').find('span:nth(' + location + ')').css('background-color', 'red');
 }
+
+function upUpDownDown(e) {
+  // console.log(e.keyCode)
+  cheatCode.push(e.keyCode)
+  console.log(cheatCode)
+
+  if (cheatCode.join() === '38,38,40,40,37,39,37,39' ) {
+    console.log('cheat enabled')
+  }
+}
+
+
+
+
+
+
+
 
 
