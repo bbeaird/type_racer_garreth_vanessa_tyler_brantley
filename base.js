@@ -22,7 +22,7 @@ function createSelectors() {
 
 function setGoalSentence(goalText, displayText) {
   console.log(goalText)
-  goalGlobal = 'you sentence you should type'
+  goalGlobal = "We're going to have to think outside the box here... I just pooped in it."
   goalText.innerHTML = goalGlobal
   goal = goalGlobal.split('')
   goal = "<span>" + goal.join('</span><span>') + "</span>"
