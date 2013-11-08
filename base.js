@@ -1,3 +1,5 @@
+// wow! this is soooo clean.  totally readable.  nicely done.  
+// Consider maybe using Jquery instead of getElementById()
 window.onload = function() {  
   var inputBox  = document.getElementById("yourinput")
   inputBox.addEventListener("input", keyDownTextField, false)
@@ -6,6 +8,7 @@ window.onload = function() {
   runGame()
 }
 
+// i like how this is right at the top.  now i know where to start!
 function runGame() {
   var selectors = createSelectors()
   setGoalSentence(selectors.goalText, selectors.displayText)
@@ -21,6 +24,7 @@ function createSelectors() {
   return selectors
 }
 
+// would be sweet if this was configurable somehow, or came in from a url
 function setGoalSentence(goalText, displayText) {
   goalGlobal = 'you sentence t sentence you should type'
   goalText.innerHTML = goalGlobal
@@ -73,11 +77,14 @@ function checkCorrect(newText) {
     highlightLetter(location)
   }
 }
-
+// this is really sexy.
+// wait, just looked at your html and it looks really busy. can it be done without all the spans?
+// also only allows letter-by-letter colorization.  other modes would be cool.
 function highlightLetter(location) {
   $('#display_sentence').find('span:nth(' + location + ')').css('background-color', 'red');
 }
 
+// cheat codes! bazinga.
 function upUpDownDown(e) {
   // console.log(e.keyCode)
   cheatCode.push(e.keyCode)
@@ -89,7 +96,7 @@ function upUpDownDown(e) {
 }
 
 
-
+// overall this is just so clean and easy to read. thank you!
 
 
 
