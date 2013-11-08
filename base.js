@@ -2,8 +2,10 @@ window.onload = function() {
   var inputBox  = document.getElementById("input_text")
   inputBox.addEventListener("input", keyDownTextField, false)
   window.addEventListener("keydown", upUpDownDown)
-  cheatCode = []
+  cheatCodeChecker = []
+  // global variable? Is there a better way to do this?
   runGame()
+  // mediator? Better way to do?
 }
 
 function runGame() {
@@ -12,12 +14,12 @@ function runGame() {
 }
 
 function createSelectors() {
-  var selectors = {
+  var elements = {
     outputText:  document.getElementById("output_text"),
     goalText:    document.getElementById("goal_text"),
     displayText: document.getElementById("display_text") 
   }
-  return selectors
+  return elements
 }
 
 function setGoalSentence(goalText, displayText) {
@@ -28,13 +30,18 @@ function setGoalSentence(goalText, displayText) {
   displayText.innerHTML = goal
 }
 
-// var notStarted = true
 
 function keyDownTextField(e) {
-  if(e.keyCode != 13) {
+  if(e.keyCode !== '13') {
     notStarted = false;
     startTime = new Date().getTime();
-  } else { computeTime(startTime); }
+    console.log("Inside when non-enter key is hit")
+    console.log(e.keyCode)
+  } 
+  if (e.keyCode === '13') {
+    console.log("When enter key is hit")
+    computeTime(startTime); 
+  }
   updateText(e.srcElement.value);
   checkCorrect(e.srcElement.value);
 }
@@ -63,9 +70,10 @@ function highlightLetter(location) {
 }
 
 function upUpDownDown(e) {
-  cheatCode.push(e.keyCode)
-  console.log(cheatCode)
-  if (cheatCode.join() === '38,38,40,40,37,39,37,39' ) {
+  var cheatCode = '38,38,40,40,37,39,37,39'
+  cheatCodeChecker.push(e.keyCode)
+  // console.log(cheatCodeChecker)
+  if (cheatCodeChecker.join() === cheatCode ) {
     console.log('cheat enabled')
   }
 }
