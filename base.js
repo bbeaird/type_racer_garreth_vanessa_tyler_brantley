@@ -23,7 +23,8 @@ function createSelectors() {
 }
 
 function setGoalSentence(goalText, displayText) {
-  goalGlobal = 'you sentence you should type'
+  console.log(goalText)
+  goalGlobal = "We're going to have to think outside the box here... I just pooped in it."
   goalText.innerHTML = goalGlobal
   goal = goalGlobal.split('')
   goal = "<span>" + goal.join('</span><span>') + "</span>"
@@ -66,7 +67,7 @@ function checkCorrect(newText) {
 }
 
 function highlightLetter(location) {
-  $('#display_text').find('span:nth(' + location + ')').css('background-color', 'red');
+  $('#display_text').find('span:nth(' + location + ')').css('color', '#d35400');
 }
 
 function upUpDownDown(e) {
