@@ -6,3 +6,4 @@
     console.log("Words per minute = " + WPM);
     return WPM;
   }
+  // this is totally cool but why a separate file for this?
