@@ -21,6 +21,7 @@ function createSelectors() {
 }
 
 function setGoalSentence(goalText, displayText) {
+  console.log(goalText)
   goalGlobal = 'you sentence you should type'
   goalText.innerHTML = goalGlobal
   goal = goalGlobal.split('')
@@ -59,7 +60,7 @@ function checkCorrect(newText) {
 }
 
 function highlightLetter(location) {
-  $('#display_text').find('span:nth(' + location + ')').css('background-color', 'red');
+  $('#display_text').find('span:nth(' + location + ')').css('color', '#d35400');
 }
 
 function upUpDownDown(e) {
