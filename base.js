@@ -22,12 +22,14 @@ function createSelectors() {
 }
 
 function setGoalSentence(goalText, displayText) {
-  goalGlobal = 'you sentence t sentence you should type'
+  goalGlobal = 'you sentence you should type'
   goalText.innerHTML = goalGlobal
   goal = goalGlobal.split('')
   goal = "<span>" + goal.join('</span><span>') + "</span>"
   displayText.innerHTML = goal
 }
+
+// var notStarted = true
 
 function keyDownTextField(e) {
   // console.log('input (3): also bubblin here')
@@ -38,6 +40,7 @@ function keyDownTextField(e) {
   // console.log(e.srcElement.value)
   updateText(e.srcElement.value);
   checkCorrect(e.srcElement.value);
+  // console.log(e)
 }
 
 function computeTime(startTime) {
@@ -87,7 +90,6 @@ function upUpDownDown(e) {
     console.log('cheat enabled')
   }
 }
-
 
 
 
