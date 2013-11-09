@@ -26,6 +26,10 @@ function createSelectors() {
   return elements
 }
 
+function results(accuracy, wpm) {
+  createSelectors().displayText.innerHTML = "wpm: " + wpm + "<br> accuracy: " + accuracy + "%"
+}
+
 function setGoalSentence(goalText, displayText) {
   console.log(goalText)
   goalGlobal = "We're going to have to think outside the box here... I just pooped in it."
@@ -49,13 +53,11 @@ function computeTime(startTime) {
   var endTime = new Date().getTime();
   console.log((endTime - startTime) / 1000);
   var finishTime = ((endTime - startTime) / 1000);
-  calcWPM(goalGlobal, finishTime)
-  findAccuracy()
+  results(findAccuracy(), calcWPM(goalGlobal, finishTime))
 }
 
 function calcWPM(userString, time) {
   var timeInMinutes = time / 60
-    // var userString = document.getElementById("yourinput").value;
     var splitString = userString.split(" ");
     var WPM = Math.round((splitString.length / timeInMinutes));
     console.log("Words per minute = " + WPM);
@@ -65,7 +67,7 @@ function calcWPM(userString, time) {
   function findAccuracy() {
     var wrongChars = cheatCodeChecker.length - goalGlobal.length
     var accuracy = Math.floor((1 - wrongChars / goalGlobal.length) * 100)
-    console.log(accuracy)
+    return accuracy
   }
 
   function checkCorrect(newText) {
