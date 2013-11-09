@@ -2,11 +2,15 @@ window.onload = function() {
   var inputBox  = document.getElementById("input_text")
   inputBox.addEventListener("input", keyDownTextField, false)
   window.addEventListener("keydown", upUpDownDown)
+
+  // window.addEventListener("keydown", startTimer)
   cheatCodeChecker = []
+  wrongCharacter = 0 
   // global variable? Is there a better way to do this?
   runGame()
   // mediator? Better way to do?
 }
+
 
 function runGame() {
   var selectors = createSelectors()
@@ -15,7 +19,7 @@ function runGame() {
 
 function createSelectors() {
   var elements = {
-    outputText:  document.getElementById("output_text"),
+    // outputText:  document.getElementById("output_text"),
     goalText:    document.getElementById("goal_text"),
     displayText: document.getElementById("display_text") 
   }
@@ -31,53 +35,76 @@ function setGoalSentence(goalText, displayText) {
   displayText.innerHTML = goal
 }
 
+var started = false
 
 function keyDownTextField(e) {
-  if(e.keyCode !== '13') {
-    notStarted = false;
+  if (started === false){
     startTime = new Date().getTime();
-    console.log("Inside when non-enter key is hit")
-    console.log(e.keyCode)
-  } 
-  if (e.keyCode === '13') {
-    console.log("When enter key is hit")
-    computeTime(startTime); 
+    started = true
   }
-  updateText(e.srcElement.value);
   checkCorrect(e.srcElement.value);
 }
 
 function computeTime(startTime) {
   var endTime = new Date().getTime();
   console.log((endTime - startTime) / 1000);
-  return ((endTime - startTime) / 1000);
+  var finishTime = ((endTime - startTime) / 1000);
+  calcWPM(goalGlobal, finishTime)
+  findAccuracy()
 }
 
-function updateText(newText) {
-  var selectors = createSelectors()
-  selectors.outputText.innerHTML = newText;
-}
-
-function checkCorrect(newText) {
-  var location = newText.length - 1
-  if ( newText[location] === goalGlobal[location] ) {
-    console.log('letter match')
-    highlightLetter(location)
+function calcWPM(userString, time) {
+  var timeInMinutes = time / 60
+    // var userString = document.getElementById("yourinput").value;
+    var splitString = userString.split(" ");
+    var WPM = Math.round((splitString.length / timeInMinutes));
+    console.log("Words per minute = " + WPM);
+    return WPM;
   }
-}
 
-function highlightLetter(location) {
-  $('#display_text').find('span:nth(' + location + ')').css('color', '#d35400');
-}
-
-function upUpDownDown(e) {
-  var cheatCode = '38,38,40,40,37,39,37,39'
-  cheatCodeChecker.push(e.keyCode)
-  // console.log(cheatCodeChecker)
-  if (cheatCodeChecker.join() === cheatCode ) {
-    console.log('cheat enabled')
+  function findAccuracy() {
+    var wrongChars = cheatCodeChecker.length - goalGlobal.length
+    var accuracy = Math.floor((1 - wrongChars / goalGlobal.length) * 100)
+    console.log(accuracy)
   }
-}
+
+  function checkCorrect(newText) {
+    var location = newText.length - 1
+    if ( newText[location] === goalGlobal[location] ) {
+      highlightLetter(location)
+      if ( location === goalGlobal.length -1 ) {
+        console.log("finished sentence")
+        computeTime(startTime)
+      }
+    }
+  }
+
+
+
+  function highlightLetter(location) {
+    $('#display_text').find('span:nth(' + location + ')').css('color', '#d35400');
+  }
+
+  function upUpDownDown(e) {
+    if (e.keyCode !== 8) { 
+      var cheatCode = '38,38,40,40,37,39,37,39'
+      cheatCodeChecker.push(e.keyCode)
+      if (cheatCodeChecker.join() === cheatCode ) {
+        console.log('cheat enabled')
+      }
+    }
+  }
+
+// function startTimer(e) {
+//   var firstLetterCorrect = '38'
+//   startTimerArray.push(e.keyCode)
+//   // console.log(cheatCodeChecker)
+//   if (startTimerArray.join() === firstLetterCorrect ) {
+//     // console.log('timer started')
+//     startTime = new Date().getTime();
+//     // console.log(startTime)
+//   }
+// }
 
 
 
