@@ -70,6 +70,7 @@ window.onload = function() {
       gameVars.cheatCodeChecker.push(e.keyCode)
       if (gameVars.cheatCodeChecker.join() === cheatCode ) {
         console.log('cheat enabled')
+        $('body').css('background', 'url(img/grumpycat-upup.jpg)')
         gameVars.kittyAttack = false
       }
     }
@@ -91,10 +92,7 @@ window.onload = function() {
       var timeDelay = Math.floor(Math.random()*60)+40;
       var lettersLength = Math.floor(Math.random()*13)+7;
       setTimeout(function(){ 
-        $('#cat').animate({ 
-          right: '2000px',
-        },
-        1500);
+        $('#cat').animate({ right: '2000px',}, 1500);
         makeLetters();
         letterCounter++;
         if (letterCounter < lettersLength) {
