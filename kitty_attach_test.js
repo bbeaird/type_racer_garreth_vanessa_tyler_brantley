@@ -17,6 +17,9 @@ function delayTime() {
     letterCounter++;
     if (letterCounter < lettersLength) {
       delayTime();
+      // $(function(){
+        // $('#cat').animate( { left: 500px } )
+      // })
     }
   }, timeDelay)
 }

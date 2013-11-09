@@ -93,6 +93,7 @@ function calcWPM(userString, time) {
       cheatCodeChecker.push(e.keyCode)
       if (cheatCodeChecker.join() === cheatCode ) {
         console.log('cheat enabled')
+        $('body').css('background', 'url(http://www.sluconnection.com/wp-content/uploads/2011/10/squirrel.jpg)')
       }
     }
   }
