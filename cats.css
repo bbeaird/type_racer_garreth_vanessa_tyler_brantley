@@ -1,44 +1,25 @@
- /*letter after #d35400
-
-bg color #16a085 ?
-letter before color #2c3e50
-#bdc3c7
-*/
 body {
   /*background-color: #bdc3c7;  */
   background: url(img/grumpycat.jpg);
+  background-repeat: no-repeat;
   font-family: 'Corben', cursive;
-
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
 }
 
 
 #display_text {
   color: #2c3e50;
   font-size: 50px;
-
 }
 
 .container {
-  width: 85%;
+  width: 80%;
   position: relative;
   top: 60px;
-  /*height: 100px;*/
   margin: auto;
   text-align: center; 
-  background-color: red;
-
-}
-
-.transparency {
-  position: absolute;
-  opacity: 0.6;
-  text-align: center;
-  margin: auto;
-  width: 100%;
-  height: 300px;
-  background-color: #fff;
-  border-radius: 2em;
-
 }
 
 #content {
@@ -46,27 +27,24 @@ body {
   text-align: center;
   position: absolute;
   width: 100%;
-
-  /*height: 400px;*/
-
+  background-color: rgba(255, 255, 255, .50);
+  padding-bottom: 50px;
+  border-radius: 2em;
 }
 
 #display_text {
   color: #2c3e50;
-
+  padding: 0 10px 0;
 }
 
 input {
   width: 80%;
   font-size: 25px;
   font-family: 'Corben', cursive;
-
   text-align: center;
-  
 }
 
 #input_text {
-  /*padding-top: 10px;*/
   border: none;
   border-radius: 2em;
 }
@@ -83,11 +61,6 @@ input {
   position: fixed;
 }
 
-li {
-  text-decoration: none;
-  display: inline-block;
-}
-
 #cat {
   z-index: 5;
   position: absolute;
@@ -95,13 +68,3 @@ li {
   right: -500px;
 }
 
-#left, #right {
-/*  padding: 0 45px 0;
-  padding-top: */
-
-}
-
-#right {
-
-
-}

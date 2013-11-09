@@ -1,12 +1,13 @@
 window.onload = function() {  
   document.getElementById("input_text").addEventListener("input", keyDownTextField, false)
   window.addEventListener("keydown", upUpDownDown)
-
+  
   var gameVars = {
     displayLocation: document.getElementById("display_text"),
     goalGlobal: "We're going to have to think outside the box here... I just pooped in it.",
     cheatCodeChecker: [],
-    started: false
+    started: false,
+    kittyAttack: true
   }
 
   function setGoalSentence() {
@@ -14,7 +15,6 @@ window.onload = function() {
     goal = "<span>" + goal.join('</span><span>') + "</span>"
     gameVars.displayLocation.innerHTML = goal
   }
-
   
   function results(accuracy, wpm) {
     gameVars.displayLocation.innerHTML = "wpm: " + wpm + "<br> accuracy: " + accuracy + "%"
@@ -70,8 +70,35 @@ window.onload = function() {
       gameVars.cheatCodeChecker.push(e.keyCode)
       if (gameVars.cheatCodeChecker.join() === cheatCode ) {
         console.log('cheat enabled')
-        $('body').css('background', 'url(http://www.sluconnection.com/wp-content/uploads/2011/10/squirrel.jpg)')
+        $('body').css('background', 'url(img/grumpycat-upup.jpg)')
+        gameVars.kittyAttack = false
       }
+    }
+  }
+
+  setTimeout( delayTime, Math.floor(Math.random()*10000)+5000);
+
+  function makeLetters(){
+    randNum = Math.floor(Math.random()*43)+48;
+    var catLetters = String.fromCharCode(randNum);
+    document.getElementById("input_text").value += catLetters
+    console.log(catLetters);
+  }
+
+  var letterCounter = 0;
+
+  function delayTime() {
+    if(gameVars.kittyAttack){
+      var timeDelay = Math.floor(Math.random()*60)+40;
+      var lettersLength = Math.floor(Math.random()*13)+7;
+      setTimeout(function(){ 
+        $('#cat').animate({ right: '2000px',}, 1500);
+        makeLetters();
+        letterCounter++;
+        if (letterCounter < lettersLength) {
+          delayTime();
+        }
+      }, timeDelay)
     }
   }
 
