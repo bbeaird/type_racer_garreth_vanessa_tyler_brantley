@@ -1,6 +1,6 @@
 // $(document).ready(function() {
 
-setTimeout( delayTime, Math.floor(Math.random()*500)+4000);
+setTimeout( delayTime, Math.floor(Math.random()*10000)+5000);
 // setTimeout( delayTime, Math.floor(Math.random()*30000)+5000);
 
 function makeLetters(){
